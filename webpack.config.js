@@ -43,6 +43,12 @@ module.exports = {
       },
     ]
   },
+  resolve: {
+    extensions: ['.js', '.css'],
+    alias: {
+      lib: path.join(__dirname, 'node_modules'),
+    }
+  },
   devServer: {
     historyApiFallback: true,
     noInfo: true

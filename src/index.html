@@ -7,14 +7,27 @@
   <body>
     <div class="reveal">
       <div class="slides">
-        <section datra-markdown>
-          前端的构建过程
+        <section data-markdown>
+          ### 前端的构建过程
           * 资源： 如图片，合并、压缩、为同一个图片生成不同大小的版本
           * 转译：es6->es5    sass->css
           * 文件合并和重命名：（重难点）
           * 
+
+          ```javascript
+          // components.js
+          import Button from './Button';
+          import Header from './Header';
+
+          // export { ExportsList }
+          // Not ES6 Destructing. Not object property shorthand
+          export {
+              Button,
+              Header
+          }
+          ```
         </section>
-        <section datra-markdown>
+        <section data-markdown>
           常见例子：
           根据模板生成html,并且自动处理上面的css/JS引用路径
           自动处理img里图片路径，css样式中背景图的路径，字体引用
@@ -23,7 +36,7 @@
           异步加载内容，比如弹出框，不需要时不加载到dom
           配合vue.js、react等框架，解析相关文件
         </section>
-        <section datra-markdown>
+        <section data-markdown>
           webpack的主要组成部分：
           entry：一个可执行模块的入口文件
           output：模块的出口目录
@@ -31,7 +44,7 @@
           loader：模块转换器，确定处理方式
           plugin：插件，拓展webpack功能，与loader一同定义webpack的处理方式
         </section>
-        <section datra-markdown>
+        <section data-markdown>
           webpack构建过程：
           读取并初始化option
           编译
@@ -42,10 +55,10 @@
           打包前合并、压缩等
           输出文件
         </section>
-        <section datra-markdown>
+        <section data-markdown>
           
         </section>
-        <section datra-markdown>
+        <section data-markdown>
           
         </section>
         <section data-markdown>

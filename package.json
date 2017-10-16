@@ -12,6 +12,7 @@
   "dependencies": {
     "highlight.js": "^9.12.0",
     "html-webpack-plugin": "^2.30.1",
+    "markdown": "^0.5.0",
     "marked": "^0.3.6",
     "reveal": "0.0.4",
     "showdown": "^1.7.4",
