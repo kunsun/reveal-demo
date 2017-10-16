@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Reveal-分享ppt</title>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section datra-markdown>
+          前端的构建过程
+          * 资源： 如图片，合并、压缩、为同一个图片生成不同大小的版本
+          * 转译：es6->es5    sass->css
+          * 文件合并和重命名：（重难点）
+          * 
+        </section>
+        <section datra-markdown>
+          常见例子：
+          根据模板生成html,并且自动处理上面的css/JS引用路径
+          自动处理img里图片路径，css样式中背景图的路径，字体引用
+          开启本地服务器，变写代码边自动更新页面内容watch
+          编译jsx、es6、sass、less、coffeescript等等并添加md5、sourcemap等辅助
+          异步加载内容，比如弹出框，不需要时不加载到dom
+          配合vue.js、react等框架，解析相关文件
+        </section>
+        <section datra-markdown>
+          webpack的主要组成部分：
+          entry：一个可执行模块的入口文件
+          output：模块的出口目录
+          chunk：多个文件组成的一个代码块
+          loader：模块转换器，确定处理方式
+          plugin：插件，拓展webpack功能，与loader一同定义webpack的处理方式
+        </section>
+        <section datra-markdown>
+          webpack构建过程：
+          读取并初始化option
+          编译
+          递归分析依赖，按照依赖build
+          构建，构建过程中会用相应的loader
+          构建完毕后编译，生成AST抽象语法树
+          遍历AST，在有依赖时，收集依赖
+          打包前合并、压缩等
+          输出文件
+        </section>
+        <section datra-markdown>
+          
+        </section>
+        <section datra-markdown>
+          
+        </section>
+        <section data-markdown>
+          ### 前端工程化目的
+          1. 提高前端工程师开发效率
+          2. 提高前后端联调
+          3. 降低技术选型成本
+        </section>
+        <section data-markdown>
+          ## 前端开发过程
+          1. 开发 [本地mock, 接线上api, hot reload, 本地静态文件服务器, webpack-dev-middleware]
+          2. 部署 [sourcemap, cdn地址, 代码压缩, css提取, 修改html文件, 分析打包后大小, CommonsChunk, manifest, xbox部署]
+        </section>
+        <section data-markdown>
+          ### Webpack
+          * file-loader
+          * url-loader
+          * html-loader
+          * css-loader
+          * style-loader
+          * expose-loader
+          * babel-loader
+        </section>
+        <section>
+          <section>Slide 2</section>
+          <section>Slide 3</section>
+        </section>
+        <section data-markdown>
+          ## Page title
+          A paragraph with some text and a [link](http://hakim.se).
+        </section>
+        <section data-markdown>
+            <script type="text/template">
+                - Item 1 <!-- .element: class="fragment" data-fragment-index="2" -->
+                - Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
+            </script> 
+        </section>
+      </div>
+    </div>
+  </body>
+</html>
