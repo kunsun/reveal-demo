@@ -21,7 +21,7 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: require.resolve('reveal'),
+        test: require.resolve('reveal.js'),
         use: [{
           loader: 'expose-loader',
           options: 'Reveal',

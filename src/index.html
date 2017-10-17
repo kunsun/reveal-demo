@@ -8,33 +8,66 @@
     <div class="reveal">
       <div class="slides">
         <section data-markdown>
-          ### 前端的构建过程
-          * 资源： 如图片，合并、压缩、为同一个图片生成不同大小的版本
-          * 转译：es6->es5    sass->css
-          * 文件合并和重命名：（重难点）
-          * 
-
-          ```javascript
-          // components.js
-          import Button from './Button';
-          import Header from './Header';
-
-          // export { ExportsList }
-          // Not ES6 Destructing. Not object property shorthand
-          export {
-              Button,
-              Header
-          }
+          <img src="./src/image/webpack-icon.svg" alt="webpack-icon" width="200px" style="background: none; border: none; box-shadow: none;">
+          ### 使用*Webpack*构建前端项目
+          <br>
+          <small>
+            小米移动前端-杨坤
+          </small>
+        </section>
+        <section data-markdown>
+          <img src="./src/image/webpack.svg" alt="">
+        </section>
+        <section data-markdown>
+          模块化的开发体系，万物皆模块
+          ```dart
+            import img from "./file.png";
+            import css from "file.css";
+            import sass from "file.sass";
           ```
         </section>
         <section data-markdown>
-          常见例子：
-          根据模板生成html,并且自动处理上面的css/JS引用路径
-          自动处理img里图片路径，css样式中背景图的路径，字体引用
-          开启本地服务器，变写代码边自动更新页面内容watch
-          编译jsx、es6、sass、less、coffeescript等等并添加md5、sourcemap等辅助
-          异步加载内容，比如弹出框，不需要时不加载到dom
-          配合vue.js、react等框架，解析相关文件
+          ## 前端开发过程
+          1. 开发 [本地mock, 接线上api, hot reload, 本地静态文件服务器, webpack-dev-middleware]
+          2. 部署 [sourcemap, cdn地址, 代码压缩, css提取, 修改html文件, 分析打包后大小, CommonsChunk, manifest, xbox部署]
+        </section>
+        <section data-markdown>
+          ### *前端的构建过程*
+          * 资源： 如图片，合并、压缩、为同一个图片生成不同大小的版本
+          * 转译：es6->es5    sass->css
+          * 文件合并和重命名：（重难点）
+          *
+          ```dart
+          // components.js
+          import Button from './Button';
+          import Header from './Header';
+          // export { ExportsList }
+          // Not ES6 Destructing. Not object property shorthand
+          export {
+          Button,
+          Header
+          }
+          ```
+        </section>
+        <style>
+        .bloom{
+        transform: scale(0);
+        transition: transform 0.7s cubic-bezier(0.68, 0.04, 0.49, 0.95);
+        }
+        .present .bloom{
+        transform: scale(1);
+        }
+        </style>
+        <section>
+          <p>常见例子</p>
+          <div class="bloom">
+            根据模板生成html,并且自动处理上面的css/JS引用路径
+            自动处理img里图片路径，css样式中背景图的路径，字体引用
+            开启本地服务器，变写代码边自动更新页面内容watch
+            编译jsx、es6、sass、less、coffeescript等等并添加md5、sourcemap等辅助
+            异步加载内容，比如弹出框，不需要时不加载到dom
+            配合vue.js、react等框架，解析相关文件
+          </div>
         </section>
         <section data-markdown>
           webpack的主要组成部分：
@@ -67,11 +100,7 @@
           2. 提高前后端联调
           3. 降低技术选型成本
         </section>
-        <section data-markdown>
-          ## 前端开发过程
-          1. 开发 [本地mock, 接线上api, hot reload, 本地静态文件服务器, webpack-dev-middleware]
-          2. 部署 [sourcemap, cdn地址, 代码压缩, css提取, 修改html文件, 分析打包后大小, CommonsChunk, manifest, xbox部署]
-        </section>
+        
         <section data-markdown>
           ### Webpack
           * file-loader
@@ -83,20 +112,20 @@
           * babel-loader
         </section>
         <section>
-          <section>Slide 2</section>
-          <section>Slide 3</section>
-        </section>
-        <section data-markdown>
-          ## Page title
-          A paragraph with some text and a [link](http://hakim.se).
-        </section>
-        <section data-markdown>
-            <script type="text/template">
-                - Item 1 <!-- .element: class="fragment" data-fragment-index="2" -->
-                - Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
-            </script> 
-        </section>
-      </div>
-    </div>
-  </body>
+        <section>Slide 2</section>
+      <section>Slide 3</section>
+    </section>
+    <section data-markdown>
+      ## Page title
+      A paragraph with some text and a [link](http://hakim.se).
+    </section>
+    <section data-markdown>
+      <script type="text/template">
+      - Item 1 <!-- .element: class="fragment" data-fragment-index="2" -->
+      - Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
+      </script>
+    </section>
+  </div>
+</div>
+</body>
 </html>
