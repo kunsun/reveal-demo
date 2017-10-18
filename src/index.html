@@ -167,9 +167,10 @@
           ```
           * *做好资源管理*
           ```javascript
-            开发过程：
+            开发过程中的资源管理：
               1. js、css、jsx、vue的编译
               2. js、css、图片、字体等路径的处理
+              3. 框架和库的使用
             性能优化：
               减少文件体积、减少http请求次数、代码分块、按需加载、cdn资源处理、css提取、打包文件名更新
           ```
@@ -226,14 +227,13 @@
               }]
             },
           ```
-          
         </section>
         <section data-markdown>
           <small>
             小图片
           </small>
           ```javascript
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALoAAABVC...">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSAAABVC...">
           ```
           <small>
             大图片
@@ -243,7 +243,29 @@
           ```
         </section>
         <section data-markdown>
+          <h4>框架的引入</h4>
 
+          <small>
+            React: *.jsx*解析
+          </small>
+          ```javascript
+            babel-loader  babel-preset-react
+          ```
+          <small>
+            Vue: *.vue*模板文件
+          </small>
+          ```javascript
+            {
+              test: /\.vue$/,
+              loader: 'vue-loader',
+            }
+          ```
+        </section>
+        <section data-markdown>
+          <p>
+            JQuery以及其扩展库，如bootstrap.modal.js, jquery.datatable.js
+          </p>
+          <p>使用*expose-loader*暴露*$*和*JQuery*</p>
         </section>
 
         <section data-markdown>
