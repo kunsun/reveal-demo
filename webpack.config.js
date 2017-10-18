@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
@@ -27,9 +28,23 @@ module.exports = {
           options: 'Reveal',
         }]
       },
+      // {
+      //   test: /\.css$/,
+      //   use: [{
+      //     loader: 'style-loader',
+      //     options: {
+      //       hmr: true,
+      //     }
+      //   }, {
+      //     loader: 'css-loader'
+      //   }],
+      // },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: 'css-loader',
+        }),
       },
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
@@ -59,6 +74,11 @@ module.exports = {
   devtool: '#eval-source-map',
 
   plugins: [
+    new ExtractTextPlugin({
+      filename: '[name].[hash].css',
+      allChunks: true,
+      ignoreOrder: true,
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),

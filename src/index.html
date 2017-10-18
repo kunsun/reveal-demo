@@ -39,38 +39,104 @@
         </section>
           
         <section data-markdown>
-          ### *环境搭建*
+          ### *1. 环境搭建*
           * 本地mock数据
           * hot reload
           * 本地静态文件服务器
-          * webpack-dev-middleware
-        </section>
-
-
-
-
-
-        <section data-markdown>
-          ## 前端开发过程
-          1. 开发 [本地mock, 接线上api, hot reload, 本地静态文件服务器, webpack-dev-middleware]
-          2. 部署 [sourcemap, cdn地址, 代码压缩, css提取, 修改html文件, 分析打包后大小, CommonsChunk, manifest, xbox部署]
         </section>
         <section data-markdown>
-          ### *前端的构建过程*
-          * 资源： 如图片，合并、压缩、为同一个图片生成不同大小的版本
-          * 转译：es6->es5    sass->css
-          * 文件合并和重命名：（重难点）
-          *
+          #### 本地mock数据
+          <small>
+            *依据后端的wiki*
+          </small>
           ```dart
-          // components.js
-          import Button from './Button';
-          import Header from './Header';
-          // export { ExportsList }
-          // Not ES6 Destructing. Not object property shorthand
-          export {
-          Button,
-          Header
-          }
+            const router = require('express').Router();
+
+            router.get('/wheel/turntableInfo', (req, res) => {
+              res.json({
+                rtnCode: 0,
+                rtnMsg: 'ok',
+                data: {
+                  remainingTimes: 7,
+                },
+              });
+            });
+          ```
+        </section>
+        <section data-markdown>
+          #### 热加载
+          <small>
+            *简单版*
+          </small>
+          ```shell
+            webpack-dev-server --hot
+          ```
+          ```javascript
+            //css
+            {
+              loader: 'style-loader',
+              options: {
+                hmr: true,
+              }
+            }
+          ```
+        </section>
+        <section data-markdown>
+          #### 热加载
+            <small>
+              *升级版*
+            </small>
+
+            ```javascrpt
+              var webpackConfig = require('./webpack.config');
+              var compiler = webpack(webpackConfig);
+              app.use(require("webpack-dev-middleware")(compiler, {
+                  noInfo: true, publicPath: webpackConfig.output.publicPath
+              }));
+              app.use(require("webpack-hot-middleware")(compiler, options));
+            ```
+
+            ```javascript
+              entry: {
+                app: ['webpack-hot-middleware/client?reload=true', 'main.js']
+              }
+              plugins: {
+                new webpack.HotModuleReplacementPlugin(),
+              }
+            ```
+        </section>
+        <section data-markdown>
+          #### 本地静态文件服务器
+
+          ```shell
+            localhost:8080\page1
+            localhost:8080\page2
+            localhost:8080\page3
+          ```
+          ```javascript
+            page1.html  page2.html  page3.html
+          ```
+        </section>
+        <section data-markdown>
+          <img src="./src/image/html-template.png" alt="" width="600px">
+          <img src="./src/image/html-file.png" alt="" width="600px">
+        </section>
+        <section data-markdown>
+          ```javascript
+            plugins: [
+              new HtmlWebpackPlugin({
+                template: './src/page1.html',
+              }),
+            ],
+          ```
+
+          ```javascript
+            app.get('/act/:name', (req, res) => {
+              const path = webpackConfig.output.path + '/' + req.params.name + '.html';
+              const htmlBuffer = devMiddlewareInstance.fileSystem.readFileSync(path);
+              res.cookie('userId', 123456);
+              res.send(htmlBuffer.toString());
+            });
           ```
         </section>
         <style>
@@ -82,17 +148,104 @@
         transform: scale(1);
         }
         </style>
-        <section>
-          <p>常见例子</p>
+        <section data-markdown>
           <div class="bloom">
-            根据模板生成html,并且自动处理上面的css/JS引用路径
-            自动处理img里图片路径，css样式中背景图的路径，字体引用
-            开启本地服务器，变写代码边自动更新页面内容watch
-            编译jsx、es6、sass、less、coffeescript等等并添加md5、sourcemap等辅助
-            异步加载内容，比如弹出框，不需要时不加载到dom
-            配合vue.js、react等框架，解析相关文件
+            <h3><em>2. 开发</em></h3>
           </div>
         </section>
+        <section data-markdown data-background='./src/image/confused.jpg' style="background: rgba(0,0,0,0.7)">
+          ### 前端开发的特点：
+          1. 大体量： 多功能、多页面、多状态、多系统
+          2. 大规模： 多人合作开发
+          3. 高性能： CDN部署、缓存机制、按需加载、请求合并、文件打包
+        </section>
+        <section data-markdown>
+          * *组件化开发*
+          ```javascript
+            按照功能划分，分为三个层次的组件：
+            页面级(page)、组件级(component)、JS模块(utils)
+          ```
+          * *做好资源管理*
+          ```javascript
+            开发过程：
+              1. js、css、jsx、vue的编译
+              2. js、css、图片、字体等路径的处理
+            性能优化：
+              减少文件体积、减少http请求次数、代码分块、按需加载、cdn资源处理、css提取、打包文件名更新
+          ```
+        </section>
+        <section data-markdown>
+          <h4>之前的页面结构</h4>
+          <img src="./src/image/css-files.png" alt="" height="400px">
+          <img src="./src/image/js-files.png" alt="" height="400px">
+        </section>
+        <section data-markdown>
+          <h4>模块化后的页面结构</h4>
+          <div>
+            <img src="./src/image/components-02.png" alt="">
+          </div>
+        </section>
+        <section data-markdown>
+          <h4>组件示意图</h3>
+          <img src="./src/image/components-03.png" alt="">
+        </section>
+        <section data-markdown>
+          <h4>编写一个dialog</h4>
+          ```javascript
+            import { getInfo } from '../utils/api';
+            import getCookie from '../utils/cookie';
+            import './dialog.css';
+            import icon from './success-icon.png';
+          ```
+          用到的webpack loader:
+          ```javascript
+            1. file-loader
+            2. url-loader
+            3. babel-loader
+            4. css-loader
+            5. style-loader
+          ```
+        </section>
+        <section data-markdown>
+          路径处理
+          ```javascript
+            import img from 'icon.png';
+            
+            var myImage = new Image(100, 200);
+            myImage.src = img;
+            document.body.appendChild(myImage);
+          ```
+          ```javascript
+            {
+              test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+              use: [{
+                loader: 'url-loader',
+                options: {
+                  limit: 8192, //Byte limit to inline files as Data URL
+                }
+              }]
+            },
+          ```
+          
+        </section>
+        <section data-markdown>
+          <small>
+            小图片
+          </small>
+          ```javascript
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALoAAABVC...">
+          ```
+          <small>
+            大图片
+          </small>
+          ```javascript
+            <img src="/img/icon.png">
+          ```
+        </section>
+        <section data-markdown>
+
+        </section>
+
         <section data-markdown>
           webpack的主要组成部分：
           entry：一个可执行模块的入口文件
@@ -118,13 +271,6 @@
         <section data-markdown>
           
         </section>
-        <section data-markdown>
-          ### 前端工程化目的
-          1. 提高前端工程师开发效率
-          2. 提高前后端联调
-          3. 降低技术选型成本
-        </section>
-        
         <section data-markdown>
           ### Webpack
           * file-loader
