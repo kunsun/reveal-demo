@@ -28,17 +28,6 @@ module.exports = {
           options: 'Reveal',
         }]
       },
-      // {
-      //   test: /\.css$/,
-      //   use: [{
-      //     loader: 'style-loader',
-      //     options: {
-      //       hmr: true,
-      //     }
-      //   }, {
-      //     loader: 'css-loader'
-      //   }],
-      // },
       {
         test: /\.css$/,
         use: ExtractTextPlugin.extract({

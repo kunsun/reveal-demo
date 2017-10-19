@@ -18,6 +18,9 @@
 
         <section data-markdown>
           <img src="./src/image/webpack.svg" alt="webpack">
+          <small>
+            *webpack treats every file as a module, but, webpack itself only understands javascript*
+          </small>
         </section>
 
         <section data-markdown>
@@ -43,6 +46,7 @@
           * 本地mock数据
           * hot reload
           * 本地静态文件服务器
+          * 本地接线上api
         </section>
         <section data-markdown>
           #### 本地mock数据
@@ -139,6 +143,13 @@
             });
           ```
         </section>
+        <section data-markdown>
+          #### 本地接线上api
+          ```javascript
+            anyProxy  代理
+            switchOmega  chrome插件  切换规则
+          ```
+        </section>
         <style>
         .bloom{
         transform: scale(0);
@@ -176,6 +187,9 @@
           ```
         </section>
         <section data-markdown>
+          *组件化开发*
+        </section>
+        <section data-markdown>
           <h4>之前的页面结构</h4>
           <img src="./src/image/css-files.png" alt="" height="400px">
           <img src="./src/image/js-files.png" alt="" height="400px">
@@ -206,6 +220,9 @@
             4. css-loader
             5. style-loader
           ```
+        </section>
+        <section data-markdown>
+          *资源管理*
         </section>
         <section data-markdown>
           路径处理
@@ -244,7 +261,6 @@
         </section>
         <section data-markdown>
           <h4>框架的引入</h4>
-
           <small>
             React: *.jsx*解析
           </small>
@@ -262,61 +278,111 @@
           ```
         </section>
         <section data-markdown>
-          <p>
-            JQuery以及其扩展库，如bootstrap.modal.js, jquery.datatable.js
-          </p>
-          <p>使用*expose-loader*暴露*$*和*JQuery*</p>
+          <small>
+            *jQuery*
+            <br>
+            以及其扩展库，如bootstrap.modal.js、jquery.datatable.js
+          </small>
+          ```javascript
+            使用expose-loader暴露$和JQuery
+          ```
         </section>
+        <section data-markdown>
+          *性能优化*
+        </section>
+        <section data-markdown>
+          前端是一种远程部署，运行时增量下载的GUI软件
+          <img src="./src/image/gui.gif" alt="">
+        </section>
+        <section data-markdown>
+          <h4>代码压缩</h4>
+          ```javascript
+            new webpack.optimize.UglifyJsPlugin({
+              compress: { warnings: false },
+              output: { comments: false },
+            }),
+          ```
+        </section>
+        <section data-markdown>
+          <h4>代码分块</h4>
+          1. *提取commonsChunk*
+          2. *动态引入*
+        </section>
+        <section data-markdown>
+          <h4>持久性缓存</h4>
+          <img src="./src/image/long-cache.png" alt="" style="background: #fff;" height="300px;">
+        </section>
+        <section data-markdown>
+          <small>1. 添加文件指纹</small>
+          ```javascript
+            foo.28d663ec.js
+            bar.d3ea8991.js
+          ```
+          <small>2. 提取manifest</small>
+          <br>
+          <small>3. 引入HashedModuleIdsPlugin</small>
+        </section>
+        <section data-markdown>
+          <h4>提取CSS</h4>
+          ```javascript
+            new ExtractTextPlugin({
+              filename: '[name].[hash].css',
+              allChunks: true,
+              ignoreOrder: true,
+            }),
+          ```
+        </section>
+        <section data-markdown>
+          <h4>cdn</h4>
+          ```javascript
+            output: {
+              publicePath: 'https://sec-boss.static.xiaomi.net/'
+            }
+            new HtmlWebpackPlugin(options)
+          ```
+        </section>
+        <section data-markdown>
+          <h4>source-map</h4>
+          <img src="./src/image/source-map.png" alt="">
+        </section>
+        <section data-markdown>
+          <h4>分析打包文件</h4>
+          <div>
+            <small>*BundleAnalyzerPlugin*</small>
+          </div>
+          <img src="./src/image/BundleAnalyzerPlugin.png" alt="">
+        </section>
+        <section data-markdown>
+          <div class="bloom">
+            <h3><em>3. 部署</em></h3>
+          </div>
+        </section>
+        <section data-markdown>
+          <img src="./src/image/archive.png" alt="">
+        </section>
+        <section data-markdown>
+          <div class="bloom">
+            <h3><em>Webpack原理</em></h3>
+          </div>
+        </section>
+        <section data-markdown>
+          #### webpack构建过程
+          ```javascript
+            1. 读取并初始化option
+            2. 编译
+            3. 递归分析依赖，按照依赖build
+            4. 构建，构建过程中会用相应的loader
+            5. 构建完毕后编译，生成AST抽象语法树
+            6. 遍历AST，在有依赖时，收集依赖
+            7. 打包前合并、压缩等
+            8. 输出文件
+          ```
+          <br>
 
-        <section data-markdown>
-          webpack的主要组成部分：
-          entry：一个可执行模块的入口文件
-          output：模块的出口目录
-          chunk：多个文件组成的一个代码块
-          loader：模块转换器，确定处理方式
-          plugin：插件，拓展webpack功能，与loader一同定义webpack的处理方式
+          <small>
+            [细说 webpsmallck 之流程篇](http://taobaofed.org/blog/2016/09/09/webpack-flow/)
+          </small>
         </section>
-        <section data-markdown>
-          webpack构建过程：
-          读取并初始化option
-          编译
-          递归分析依赖，按照依赖build
-          构建，构建过程中会用相应的loader
-          构建完毕后编译，生成AST抽象语法树
-          遍历AST，在有依赖时，收集依赖
-          打包前合并、压缩等
-          输出文件
-        </section>
-        <section data-markdown>
-          
-        </section>
-        <section data-markdown>
-          
-        </section>
-        <section data-markdown>
-          ### Webpack
-          * file-loader
-          * url-loader
-          * html-loader
-          * css-loader
-          * style-loader
-          * expose-loader
-          * babel-loader
-        </section>
-        <section>
-        <section>Slide 2</section>
-      <section>Slide 3</section>
-    </section>
-    <section data-markdown>
-      ## Page title
-      A paragraph with some text and a [link](http://hakim.se).
-    </section>
-    <section data-markdown>
-      <script type="text/template">
-      - Item 1 <!-- .element: class="fragment" data-fragment-index="2" -->
-      - Item 2 <!-- .element: class="fragment" data-fragment-index="1" -->
-      </script>
-    </section>
   </div>
 </div>
 </body>
