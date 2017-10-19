@@ -4,7 +4,7 @@
   "description": "",
   "main": "src/main.js",
   "scripts": {
-    "dev": "nodemon -w webpack.config.js -x \"set NODE_ENV=development && webpack-dev-server --hot\"",
+    "dev": "nodemon -w webpack.config.js -x \"set NODE_ENV=development && webpack-dev-server --host 0.0.0.0 --hot\"",
     "build": "NODE_ENV=production webpack --progress --hide-modules"
   },
   "author": "",
