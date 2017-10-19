@@ -1,5 +1,4 @@
 import Reveal from 'reveal.js';
-import zoom from './plugin/zoom';
 
 import marked from 'marked';
 import hljs from 'highlight.js';
@@ -8,8 +7,6 @@ import hljs from 'highlight.js';
 import 'lib/reveal.js/css/reveal.css';
 import 'lib/reveal.js/css/theme/wx.css';
 import './index.css';
-// import 'lib/reveal.js/css/print/pdf.css'
-// // import 'lib/reveal.js/css/print/paper.css'
 
 function codeEditor() {
   var nodes = document.querySelectorAll("code");

@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+      <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>使用Webpack构建前端项目</title>
   </head>
@@ -247,18 +249,10 @@
           ```
         </section>
         <section data-markdown>
-          <small>
-            小图片
-          </small>
-          ```javascript
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSAAABVC...">
-          ```
-          <small>
-            大图片
-          </small>
-          ```javascript
-            <img src="/img/icon.png">
-          ```
+            <p>小图片</p>
+            <img src="./src/image/url-loader-small.png">
+            <p>大图片</p>
+            <img src="./src/image/url-loader-large.png">
         </section>
         <section data-markdown>
           <h4>框架的引入</h4>
