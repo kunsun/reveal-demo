@@ -309,6 +309,31 @@
           2. *动态引入*
         </section>
         <section data-markdown>
+          <h4>动态引入</h4>
+
+          ```javascript
+            1. 访问某个路由的时候再去加载对应的组件
+            2. 访问某个模块的时候再加载
+            - import _ from 'lodash';
+            -
+            - function component() {
+            + function getComponent() {
+            -   var element = document.createElement('div');
+            -   // Lodash, now imported by this script
+            -   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+            +   return import(/* webpackChunkName: "lodash" */ 'lodash').then(_ => {
+            +     var element = document.createElement('div');
+            +     element.innerHTML = _.join(['Hello', 'webpack'], ' ');
+            +     return element;
+            +   }).catch(error => 'An error occurred while loading the component');
+              }
+            - document.body.appendChild(component());
+            + getComponent().then(component => {
+            +   document.body.appendChild(component);
+            + })
+          ```
+        </section>
+        <section data-markdown>
           <h4>持久性缓存</h4>
           <img src="./src/image/long-cache.png" alt="" style="background: #fff;" height="300px;">
         </section>
